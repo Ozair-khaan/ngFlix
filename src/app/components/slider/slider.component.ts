@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { MoviesService } from 'src/app/services/movies.service';
 
 @Component({
   selector: 'app-slider',
@@ -7,13 +8,18 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./slider.component.scss']
 })
 export class SliderComponent implements OnInit {
-  constructor(private http: HttpClient){}
+
+  movies: any
+
+  constructor(private moviesService : MoviesService){}
 
   ngOnInit(){
-    this.http.get(
-      'https://api.themoviedb.org/3/movie/popular?api_key=8c247ea0b4b56ed2ff7d41c9a833aa77'
-    ).subscribe((data) => {
-      console.log("data is present here : "+data)
+    this.getPopoularMovies();
+  }
+
+  getPopoularMovies(){
+    this.moviesService.getPopularMovies().subscribe((data) => {
+      this.movies=data;
     })
   }
 }
