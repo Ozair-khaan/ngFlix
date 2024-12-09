@@ -26,6 +26,22 @@
         </div>
     </div>
 </div>
+
+<div *ngFor="let item of items">
+{{item}}
+</div>
+
+<div *ngIf="items.length > 4">
+    this is array of 5 items and more
+</div>
+
 <pre>
-    {{ movies | json}}
+    {{ movies$ | async | json}}
 </pre>
+
+<div *ngIf="movies$ | async as movies">
+    <div class="movie" *ngFor="let movie of movies.results">
+        {{movie.title}}
+    </div>
+</div>
+
